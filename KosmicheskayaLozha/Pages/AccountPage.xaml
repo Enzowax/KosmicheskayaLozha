@@ -1,0 +1,83 @@
+<Page x:Class="KosmicheskayaLozha.Pages.AccountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BackgroundBrush}" Title="Аккаунт">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="16,10">
+                <Button Content="← Назад" Style="{StaticResource BackButton}"
+                        HorizontalAlignment="Left" Click="BtnBack_Click"/>
+                <TextBlock Text="👤 Мой аккаунт" Foreground="{StaticResource AccentBrush}"
+                           FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- Инфо о пользователе -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="20,16,20,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="👤" FontSize="36" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock x:Name="TxtName" Foreground="{StaticResource TextBrush}"
+                               FontSize="18" FontWeight="Bold"/>
+                    <TextBlock x:Name="TxtPhone" Foreground="{StaticResource SubtextBrush}" FontSize="13"/>
+                    <TextBlock x:Name="TxtRole"  Foreground="{StaticResource AccentBrush}"  FontSize="12"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Вкладки: Записи / Заказы -->
+        <Grid Grid.Row="2" Margin="20,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TabControl Grid.Row="0" Grid.RowSpan="2"
+                        Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource PrimaryBrush}">
+
+                <!-- Записи -->
+                <TabItem Header="📅 Мои записи">
+                    <DataGrid x:Name="DgAppointments"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="38" Margin="8">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата и время"   Binding="{Binding DateTimeStr}"       Width="130"/>
+                            <DataGridTextColumn Header="Услуга"          Binding="{Binding ServiceTypeName}"   Width="*"/>
+                            <DataGridTextColumn Header="Мастер"          Binding="{Binding MasterFullName}"    Width="180"/>
+                            <DataGridTextColumn Header="Оплата"          Binding="{Binding PaymentMethod}"     Width="100"/>
+                            <DataGridTextColumn Header="Статус"          Binding="{Binding StatusText}"        Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <!-- Заказы -->
+                <TabItem Header="📦 Мои заказы">
+                    <DataGrid x:Name="DgOrders"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="38" Margin="8">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№ заказа"  Binding="{Binding Id}"                              Width="70"/>
+                            <DataGridTextColumn Header="Дата"      Binding="{Binding OrderDate, StringFormat=dd.MM.yyyy}" Width="90"/>
+                            <DataGridTextColumn Header="Доставка"  Binding="{Binding DeliveryDate, StringFormat=dd.MM.yyyy}" Width="90"/>
+                            <DataGridTextColumn Header="Оплата"    Binding="{Binding PaymentMethod}"                    Width="100"/>
+                            <DataGridTextColumn Header="Сумма"     Binding="{Binding Total, StringFormat='{}{0:N2} ₽'}" Width="100"/>
+                            <DataGridTextColumn Header="Статус"    Binding="{Binding StatusText}"                       Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Page>

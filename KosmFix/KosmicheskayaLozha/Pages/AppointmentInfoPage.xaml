@@ -1,0 +1,88 @@
+<Page x:Class="KosmicheskayaLozha.Pages.AppointmentInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BackgroundBrush}" Title="Детали записи">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="16,10">
+                <Button Content="← Назад" Style="{StaticResource BackButton}"
+                        HorizontalAlignment="Left" Click="BtnBack_Click"/>
+                <TextBlock Text="📋 Детали записи" Foreground="{StaticResource AccentBrush}"
+                           FontSize="18" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource Card}"
+                Width="480" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Информация о записи" Style="{StaticResource PageTitle}" FontSize="18"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="32"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="📅 Дата и время:"
+                               Foreground="{StaticResource SubtextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtDateTime"
+                               Foreground="{StaticResource TextBrush}" FontWeight="Bold" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="💅 Услуга:"
+                               Foreground="{StaticResource SubtextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtService"
+                               Foreground="{StaticResource TextBrush}" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="💰 Стоимость:"
+                               Foreground="{StaticResource SubtextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtPrice"
+                               Foreground="{StaticResource AccentBrush}" FontWeight="Bold" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="👤 Клиент:"
+                               Foreground="{StaticResource SubtextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtClient"
+                               Foreground="{StaticResource TextBrush}" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="📞 Телефон:"
+                               Foreground="{StaticResource SubtextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="TxtPhone"
+                               Foreground="{StaticResource TextBrush}" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="💬 Комментарий:"
+                               Foreground="{StaticResource SubtextBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="5" Grid.Column="1" x:Name="TxtComment"
+                               Foreground="{StaticResource TextBrush}" VerticalAlignment="Center"
+                               TextWrapping="Wrap"/>
+                </Grid>
+
+                <!-- Статус -->
+                <Border Background="#3D1060" CornerRadius="6" Padding="10,6" Margin="0,0,0,16">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Статус: " Foreground="{StaticResource SubtextBrush}"/>
+                        <TextBlock x:Name="TxtStatus" Foreground="{StaticResource AccentBrush}"
+                                   FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+
+                <Button x:Name="BtnComplete" Content="✅ Отметить как выполненную"
+                        Style="{StaticResource SuccessButton}"
+                        Click="BtnComplete_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

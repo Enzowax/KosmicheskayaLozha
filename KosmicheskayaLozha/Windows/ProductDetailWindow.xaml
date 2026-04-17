@@ -1,0 +1,68 @@
+<Window x:Class="KosmicheskayaLozha.Windows.ProductDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Товар" Height="420" Width="480"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}"
+        ResizeMode="NoResize">
+    <Border Style="{StaticResource Card}" Margin="16">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                <Border x:Name="DiscountBadge" Visibility="Collapsed"
+                        Background="{StaticResource DiscountBrush}"
+                        CornerRadius="4" Padding="6,2" Margin="0,0,8,0">
+                    <TextBlock x:Name="TxtDiscount" Foreground="White"
+                               FontWeight="Bold" FontSize="12"/>
+                </Border>
+                <TextBlock x:Name="TxtFrozen" Text="❄ Заморожен"
+                           Foreground="#4FC3F7" FontSize="12" VerticalAlignment="Center"
+                           Visibility="Collapsed"/>
+            </StackPanel>
+
+            <TextBlock x:Name="TxtName" Style="{StaticResource PageTitle}" FontSize="20"
+                       TextWrapping="Wrap"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <TextBlock x:Name="TxtType"    Foreground="{StaticResource SubtextBrush}" FontSize="12"/>
+                <TextBlock Text=" · " Foreground="{StaticResource SubtextBrush}" FontSize="12"/>
+                <TextBlock x:Name="TxtMfr"     Foreground="{StaticResource SubtextBrush}" FontSize="12"/>
+            </StackPanel>
+
+            <TextBlock x:Name="TxtDesc" Foreground="{StaticResource TextBrush}"
+                       FontSize="13" TextWrapping="Wrap" Margin="0,0,0,16"
+                       LineHeight="20"/>
+
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Цена" Style="{StaticResource FieldLabel}"/>
+                    <StackPanel>
+                        <TextBlock x:Name="TxtOldPrice"
+                                   Foreground="{StaticResource SubtextBrush}"
+                                   TextDecorations="Strikethrough" FontSize="13"
+                                   Visibility="Collapsed"/>
+                        <TextBlock x:Name="TxtPrice"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   FontSize="22" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Рейтинг" Style="{StaticResource FieldLabel}"/>
+                    <TextBlock x:Name="TxtRating"
+                               Foreground="{StaticResource AccentBrush}"
+                               FontSize="22" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+
+            <Button Content="🛒 Добавить в корзину" Style="{StaticResource PrimaryButton}"
+                    FontSize="14" x:Name="BtnAdd" Click="BtnAdd_Click"/>
+            <Button Content="✖ Закрыть" Style="{StaticResource BackButton}"
+                    Margin="0,8,0,0" Click="BtnClose_Click"/>
+        </StackPanel>
+    </Border>
+</Window>

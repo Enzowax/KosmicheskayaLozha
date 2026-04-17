@@ -1,0 +1,198 @@
+<Page x:Class="KosmicheskayaLozha.Pages.ManagerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BackgroundBrush}" Title="Менеджер">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="16,10">
+                <Button Content="🚪 Выйти" Style="{StaticResource DangerButton}"
+                        HorizontalAlignment="Left" Click="BtnLogout_Click"/>
+                <TextBlock x:Name="TxtTitle" Foreground="{StaticResource AccentBrush}"
+                           FontSize="20" FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- Вкладки менеджера -->
+        <TabControl Grid.Row="1" Background="{StaticResource SurfaceBrush}"
+                    BorderBrush="{StaticResource PrimaryBrush}" Margin="12">
+
+            <!-- ═══════════ ЗАПИСИ ═══════════ -->
+            <TabItem Header="📅 Записи">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="➕ Создать запись" Style="{StaticResource PrimaryButton}"
+                                Margin="0,0,8,0" Click="BtnCreateAppointment_Click"/>
+                        <Button Content="✏ Перенести" Style="{StaticResource BackButton}"
+                                Margin="0,0,8,0" Click="BtnReschedule_Click"/>
+                        <Button Content="❌ Отменить" Style="{StaticResource DangerButton}"
+                                Click="BtnCancelAppointment_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" x:Name="DgAppointments"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата"    Binding="{Binding DateTimeStr}"     Width="130"/>
+                            <DataGridTextColumn Header="Услуга"  Binding="{Binding ServiceTypeName}" Width="*"/>
+                            <DataGridTextColumn Header="Мастер"  Binding="{Binding MasterFullName}"  Width="160"/>
+                            <DataGridTextColumn Header="Клиент"  Binding="{Binding ClientFullName}"  Width="160"/>
+                            <DataGridTextColumn Header="Оплата"  Binding="{Binding PaymentMethod}"   Width="90"/>
+                            <DataGridTextColumn Header="Статус"  Binding="{Binding StatusText}"      Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- ═══════════ ЗАКАЗЫ ═══════════ -->
+            <TabItem Header="📦 Заказы">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Content="✅ Закрыть выбранный заказ"
+                            Style="{StaticResource SuccessButton}"
+                            HorizontalAlignment="Left" Margin="0,0,0,10"
+                            Click="BtnCloseOrder_Click"/>
+
+                    <DataGrid Grid.Row="1" x:Name="DgOrders"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№"         Binding="{Binding Id}"                                    Width="50"/>
+                            <DataGridTextColumn Header="Клиент"    Binding="{Binding ClientName}"                             Width="160"/>
+                            <DataGridTextColumn Header="Дата"      Binding="{Binding OrderDate, StringFormat=dd.MM.yyyy}"    Width="90"/>
+                            <DataGridTextColumn Header="Доставка"  Binding="{Binding DeliveryDate, StringFormat=dd.MM.yyyy}" Width="90"/>
+                            <DataGridTextColumn Header="Сумма"     Binding="{Binding Total, StringFormat='{}{0:N2} ₽'}"      Width="100"/>
+                            <DataGridTextColumn Header="Статус"    Binding="{Binding StatusText}"                            Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- ═══════════ ТОВАРЫ ═══════════ -->
+            <TabItem Header="🛍 Товары">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="➕ Добавить" Style="{StaticResource PrimaryButton}"
+                                Margin="0,0,8,0" Click="BtnAddProduct_Click"/>
+                        <Button Content="✏ Изменить" Style="{StaticResource BackButton}"
+                                Margin="0,0,8,0" Click="BtnEditProduct_Click"/>
+                        <Button Content="❄ Заморозить / 🔥 Разморозить" Style="{StaticResource BackButton}"
+                                Click="BtnFreezeProduct_Click"/>
+                    </StackPanel>
+                    <DataGrid Grid.Row="1" x:Name="DgProducts"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название"      Binding="{Binding Name}"             Width="*"/>
+                            <DataGridTextColumn Header="Тип"           Binding="{Binding ProductTypeName}"  Width="100"/>
+                            <DataGridTextColumn Header="Производитель" Binding="{Binding ManufacturerName}" Width="120"/>
+                            <DataGridTextColumn Header="Цена"          Binding="{Binding Price, StringFormat='{}{0:N2} ₽'}" Width="90"/>
+                            <DataGridTextColumn Header="Скидка"        Binding="{Binding Discount, StringFormat='{}{0}%'}"  Width="60"/>
+                            <DataGridTextColumn Header="Рейтинг"       Binding="{Binding Rating}"           Width="70"/>
+                            <DataGridCheckBoxColumn Header="Заморожен" Binding="{Binding IsFrozen}"         Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- ═══════════ ПРОИЗВОДИТЕЛИ ═══════════ -->
+            <TabItem Header="🏭 Производители">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="➕ Добавить" Style="{StaticResource PrimaryButton}"
+                                Margin="0,0,8,0" Click="BtnAddManufacturer_Click"/>
+                        <Button Content="✏ Изменить" Style="{StaticResource BackButton}"
+                                Click="BtnEditManufacturer_Click"/>
+                    </StackPanel>
+                    <DataGrid Grid.Row="1" x:Name="DgManufacturers"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"           Binding="{Binding Id}"   Width="50"/>
+                            <DataGridTextColumn Header="Производитель" Binding="{Binding Name}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- ═══════════ ТИПЫ ТОВАРОВ ═══════════ -->
+            <TabItem Header="🏷 Типы товаров">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="➕ Добавить" Style="{StaticResource PrimaryButton}"
+                                Margin="0,0,8,0" Click="BtnAddProductType_Click"/>
+                        <Button Content="✏ Изменить" Style="{StaticResource BackButton}"
+                                Click="BtnEditProductType_Click"/>
+                    </StackPanel>
+                    <DataGrid x:Name="DgProductTypes" Grid.Row="1"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID"        Binding="{Binding Id}"   Width="50"/>
+                            <DataGridTextColumn Header="Тип товара" Binding="{Binding Name}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- ═══════════ УСЛУГИ ═══════════ -->
+            <TabItem Header="💅 Типы услуг">
+                <Grid Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <Button Content="➕ Добавить" Style="{StaticResource PrimaryButton}"
+                                Margin="0,0,8,0" Click="BtnAddServiceType_Click"/>
+                        <Button Content="✏ Изменить" Style="{StaticResource BackButton}"
+                                Click="BtnEditServiceType_Click"/>
+                    </StackPanel>
+                    <DataGrid x:Name="DgServiceTypes" Grid.Row="1"
+                              Style="{StaticResource ModernDataGrid}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              CanUserResizeRows="False" RowHeight="36">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Услуга" Binding="{Binding Name}"  Width="*"/>
+                            <DataGridTextColumn Header="Цена"   Binding="{Binding Price, StringFormat='{}{0:N2} ₽'}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Page>

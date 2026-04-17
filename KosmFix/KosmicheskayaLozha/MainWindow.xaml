@@ -1,0 +1,12 @@
+<Window x:Class="KosmicheskayaLozha.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="✨ Космическая ложа" Height="700" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid>
+        <Frame x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               Background="{StaticResource BackgroundBrush}"/>
+    </Grid>
+</Window>

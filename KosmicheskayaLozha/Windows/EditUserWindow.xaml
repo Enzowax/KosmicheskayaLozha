@@ -1,0 +1,54 @@
+<Window x:Class="KosmicheskayaLozha.Windows.EditUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Пользователь" Height="500" Width="440"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource BackgroundBrush}"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{StaticResource Card}" Margin="16">
+            <StackPanel>
+                <TextBlock x:Name="TxtTitle" Style="{StaticResource PageTitle}" FontSize="18"/>
+
+                <TextBlock Text="Логин:" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TxtLogin" Style="{StaticResource ModernTextBox}"/>
+
+                <TextBlock Text="Пароль:" Style="{StaticResource FieldLabel}"/>
+                <PasswordBox x:Name="TxtPassword" Style="{StaticResource ModernPasswordBox}"/>
+
+                <TextBlock Text="Фамилия:" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TxtLastName" Style="{StaticResource ModernTextBox}"/>
+
+                <TextBlock Text="Имя:" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TxtFirstName" Style="{StaticResource ModernTextBox}"/>
+
+                <TextBlock Text="Отчество (необязательно):" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TxtMiddleName" Style="{StaticResource ModernTextBox}"/>
+
+                <TextBlock Text="Телефон:" Style="{StaticResource FieldLabel}"/>
+                <TextBox x:Name="TxtPhone" Style="{StaticResource ModernTextBox}"/>
+
+                <TextBlock Text="Роль:" Style="{StaticResource FieldLabel}"/>
+                
+                <ComboBox x:Name="CmbRole" 
+                          Style="{StaticResource ModernComboBox}" 
+                          DisplayMemberPath="Name"/>
+
+                <TextBlock x:Name="TxtError" Foreground="{StaticResource DangerBrush}"
+                           FontSize="11" Margin="0,6,0,0" Visibility="Collapsed"/>
+
+                <Grid Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="✖ Отмена" Style="{StaticResource BackButton}"
+                            Click="BtnCancel_Click"/>
+                    <Button Grid.Column="2" Content="💾 Сохранить" Style="{StaticResource SuccessButton}"
+                            Click="BtnSave_Click"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>
